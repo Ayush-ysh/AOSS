@@ -5,17 +5,17 @@ export interface ContactFormData {
   aoss_bot_check?: string // honeypot
 }
 
-export async function submitContactForm(data: ContactFormData): Promise<boolean> {
+export async function submitContactForm(data: ContactFormData): Promise<{success: boolean, error?: string}> {
   const webhookUrl = import.meta.env.VITE_GOOGLE_SHEETS_WEBHOOK_URL
 
   if (!webhookUrl) {
     console.error('Google Sheets webhook URL is not configured.')
-    return false
+    return { success: false, error: 'Webhook URL is missing from environment variables (VITE_GOOGLE_SHEETS_WEBHOOK_URL).' }
   }
 
   // If honeypot is filled, silently resolve (prevent spam)
   if (data.aoss_bot_check) {
-    return true
+    return { success: true }
   }
 
   try {
@@ -40,12 +40,12 @@ export async function submitContactForm(data: ContactFormData): Promise<boolean>
     // If it's no-cors, response.ok is false and status is 0, but it might have succeeded.
     // If we use standard cors and the server responds correctly, we get a 200.
     if (response.ok || response.type === 'opaque') {
-      return true
+      return { success: true }
     }
     
-    return false
-  } catch (error) {
+    return { success: false, error: `Response failed. Status: ${response.status}, Type: ${response.type}` }
+  } catch (error: any) {
     console.error('Form submission error:', error)
-    return false
+    return { success: false, error: error.message || String(error) }
   }
 }

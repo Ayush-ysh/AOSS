@@ -15,6 +15,7 @@ export default function Contact() {
     aoss_bot_check: '' 
   })
   const [status, setStatus] = useState<FormStatus>('idle')
+  const [errorMessage, setErrorMessage] = useState<string>('')
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -28,10 +29,11 @@ export default function Contact() {
     }
 
     setStatus('submitting')
+    setErrorMessage('')
 
-    const success = await submitContactForm(form)
+    const result = await submitContactForm(form)
 
-    if (success) {
+    if (result.success) {
       setStatus('success')
       setForm({ name: '', email: '', message: '', aoss_bot_check: '' })
       
@@ -39,9 +41,10 @@ export default function Contact() {
       setTimeout(() => setStatus('idle'), 5000)
     } else {
       setStatus('error')
+      setErrorMessage(result.error || 'Unknown error occurred.')
       
       // Reset error state after a few seconds so they can try again
-      setTimeout(() => setStatus('idle'), 5000)
+      // setTimeout(() => setStatus('idle'), 10000) // Keep it longer so we can read it
     }
   }
 
@@ -195,8 +198,8 @@ export default function Contact() {
                     </span>
                   )}
                   {status === 'error' && (
-                    <span className="text-red-500 text-xs font-semibold tracking-wide uppercase">
-                      Something went wrong. Please try again.
+                    <span className="text-red-500 text-xs font-semibold tracking-wide uppercase max-w-md block leading-snug">
+                      {errorMessage}
                     </span>
                   )}
                 </div>
