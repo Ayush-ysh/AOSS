@@ -1,0 +1,259 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import "tailwindcss";
+
+/* ─── Design Tokens ─── */
+:root {
+  --bg-primary: #050505;
+  --bg-dark: #000000;
+  --text-primary: #ffffff;
+  --text-secondary: #888888;
+  --accent-violet: #7c3aed;
+  --accent-blue: #2563eb;
+  --accent-magenta: #db2777;
+
+  /* Spacing system */
+  --space-outer: clamp(40px, 4.4vw, 80px);
+  --container-max: 1800px;
+
+  /* Section vertical rhythm */
+  --section-y: clamp(120px, 12vh, 180px);
+  --section-y-lg: clamp(160px, 16vh, 240px);
+}
+
+/* ─── Reset ─── */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background-color: #000000;
+  color: #ffffff;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(124, 58, 237, 0.3);
+  color: #ffffff;
+}
+
+/* ─── Global Container ─── */
+.aoss-container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--space-outer);
+  padding-right: var(--space-outer);
+}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar { width: 2px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #222; border-radius: 2px; }
+
+/* ─── Animations ─── */
+
+/* Ticker / marquee */
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* Gentle float */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-14px); }
+}
+
+/* Pulse glow */
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.25; }
+  50%       { opacity: 0.7; }
+}
+
+/* Button arrow shift right */
+@keyframes arrow-right {
+  0%, 100% { transform: translateX(0); }
+  50%       { transform: translateX(3px); }
+}
+
+/* Button arrow shift down */
+@keyframes arrow-down {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(3px); }
+}
+
+/* Node glow pulse for SVG */
+@keyframes node-glow {
+  0%, 100% { filter: drop-shadow(0 0 4px rgba(124,58,237,0.7)); }
+  50%       { filter: drop-shadow(0 0 10px rgba(124,58,237,1)); }
+}
+
+@keyframes node-glow-blue {
+  0%, 100% { filter: drop-shadow(0 0 4px rgba(37,99,235,0.7)); }
+  50%       { filter: drop-shadow(0 0 10px rgba(37,99,235,1)); }
+}
+
+@keyframes node-glow-magenta {
+  0%, 100% { filter: drop-shadow(0 0 4px rgba(219,39,119,0.7)); }
+  50%       { filter: drop-shadow(0 0 8px rgba(219,39,119,1)); }
+}
+
+/* Orbit rotation */
+@keyframes orbit-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.animate-float {
+  animation: float 7s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 4s ease-in-out infinite;
+}
+
+.animate-node-violet {
+  animation: node-glow 3s ease-in-out infinite;
+}
+
+.animate-node-blue {
+  animation: node-glow-blue 3.5s ease-in-out infinite;
+}
+
+.animate-node-magenta {
+  animation: node-glow-magenta 4s ease-in-out infinite;
+}
+
+/* ─── Premium Button System ─── */
+
+/* Primary — gradient pill with glow */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 56px;
+  padding: 0 32px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #ffffff;
+  background: linear-gradient(135deg, #5b21b6 0%, #2563eb 100%);
+  border: 1px solid rgba(124,58,237,0.5);
+  box-shadow: 0 0 28px rgba(124,58,237,0.25), inset 0 1px 0 rgba(255,255,255,0.1);
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  cursor: pointer;
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, transparent 60%);
+  border-radius: 999px;
+  pointer-events: none;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 44px rgba(124,58,237,0.45), 0 8px 24px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.15);
+  border-color: rgba(124,58,237,0.8);
+}
+
+.btn-primary .btn-arrow {
+  display: inline-block;
+  transition: transform 0.25s ease;
+}
+
+.btn-primary:hover .btn-arrow {
+  transform: translateX(4px);
+}
+
+/* Secondary — ghost pill */
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 56px;
+  padding: 0 32px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: rgba(255,255,255,0.65);
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.18);
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn-secondary:hover {
+  color: rgba(255,255,255,0.9);
+  background: rgba(255,255,255,0.05);
+  border-color: rgba(255,255,255,0.38);
+  transform: translateY(-1px);
+}
+
+.btn-secondary .btn-arrow {
+  display: inline-block;
+  transition: transform 0.25s ease;
+}
+
+.btn-secondary:hover .btn-arrow {
+  transform: translateY(3px);
+}
+
+/* ─── Service row hover ─── */
+.service-row {
+  transition: opacity 0.25s ease, padding-left 0.3s ease;
+}
+.service-row:hover {
+  opacity: 0.65;
+}
+
+/* ─── Principle card hover ─── */
+.principle-card {
+  transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+}
+.principle-card:hover {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-color: rgba(255, 255, 255, 0.14) !important;
+  transform: translateY(-2px);
+}
+
+/* ─── Image panel scale on hover ─── */
+.image-panel {
+  overflow: hidden;
+  transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* ─── Contact inputs ─── */
+.contact-input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(0,0,0,0.2);
+  outline: none;
+  width: 100%;
+  transition: border-color 0.2s ease;
+}
+.contact-input:focus {
+  border-color: rgba(0,0,0,0.6);
+}
