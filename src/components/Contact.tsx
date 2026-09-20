@@ -67,13 +67,14 @@ export default function Contact() {
             className="flex-1 flex flex-col"
           >
             <h2
-              className="text-black font-black uppercase"
+              className="text-black font-black uppercase overflow-hidden"
               style={{
-                fontSize: 'clamp(4.2rem, 10vw, 9.5rem)',
+                fontSize: 'clamp(3rem, 10vw, 9.5rem)',
                 lineHeight: 0.86,
                 letterSpacing: '-0.04em',
                 fontWeight: 900,
                 marginBottom: '8vh',
+                wordBreak: 'break-word',
               }}
             >
               LET'S<br />
