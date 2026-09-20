@@ -531,7 +531,7 @@ export default function Hero() {
                           variants={item}
                           className="text-white uppercase block"
                           style={{
-                            fontSize: 'clamp(5.5rem, 13vw, 12.5rem)',
+                            fontSize: 'clamp(3.5rem, 13vw, 12.5rem)',
                             lineHeight: 0.85,
                             letterSpacing: '-0.04em',
                             fontWeight: 900,

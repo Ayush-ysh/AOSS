@@ -195,20 +195,20 @@ function StickyCard({
           >
             {/* Card header */}
             <div
-              className="flex items-center justify-between border-b"
+              className="flex flex-col md:flex-row md:items-center justify-between border-b gap-4 md:gap-0"
               style={{
-                padding: '2.5rem 3rem',
+                padding: '1.5rem 1.5rem',
                 borderColor: 'rgba(255,255,255,0.08)',
               }}
             >
-              <div className="flex items-center gap-6">
+              <div className="flex items-center gap-4 md:gap-6">
                 <span
                   className="text-white font-black"
-                  style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 900, letterSpacing: '-0.04em', lineHeight: 1 }}
+                  style={{ fontSize: 'clamp(2rem, 5vw, 4rem)', fontWeight: 900, letterSpacing: '-0.04em', lineHeight: 1 }}
                 >
                   {venture.num}
                 </span>
-                <div className="w-[1px] h-10 bg-white/10" />
+                <div className="w-[1px] h-8 md:h-10 bg-white/10" />
                 <div className="flex flex-col gap-1">
                   <span className="text-white/40 text-[9px] font-bold tracking-[0.25em] uppercase">
                     {venture.label}
@@ -223,10 +223,10 @@ function StickyCard({
               </div>
               {/* Status pill */}
               <div
-                className="border rounded-full flex-shrink-0 flex items-center justify-center"
+                className="border rounded-full flex-shrink-0 flex items-center justify-center self-start md:self-auto"
                 style={{
-                  height: '36px',
-                  padding: '0 20px',
+                  height: '32px',
+                  padding: '0 16px',
                   borderColor: 'rgba(255,255,255,0.18)',
                 }}
               >
@@ -239,21 +239,21 @@ function StickyCard({
             {/* Visual area — large panels */}
             {(!venture.images || venture.images.side) ? (
               <div
-                className="grid gap-5"
+                className="grid gap-3 md:gap-5 grid-cols-1 lg:grid-cols-[3fr_2fr]"
                 style={{
-                  gridTemplateColumns: '3fr 2fr',
-                  padding: '2rem 3rem 3rem',
-                  height: 'clamp(380px, 50vh, 580px)',
+                  padding: '1.5rem 1.5rem 2rem',
+                  height: 'auto',
+                  minHeight: 'clamp(300px, 50vh, 580px)',
                 }}
               >
                 {/* Main panel */}
-                <div className="h-full image-panel rounded-3xl">
+                <div className="h-[250px] lg:h-full image-panel rounded-3xl">
                   <ProjectPanel variant="main" index={index} imageUrl={venture.images?.main} fit={venture.images?.fit} />
                 </div>
 
                 {/* Side column */}
-                <div className="flex flex-col gap-5 h-full">
-                  <div className="flex-1 image-panel rounded-3xl">
+                <div className="flex flex-col gap-3 md:gap-5 h-full">
+                  <div className="flex-1 min-h-[150px] image-panel rounded-3xl hidden lg:block">
                     <ProjectPanel variant="side" index={index} imageUrl={venture.images?.side} fit={venture.images?.fit} />
                   </div>
                   {/* Description block */}
@@ -261,7 +261,7 @@ function StickyCard({
                     className="border flex-shrink-0 flex items-center"
                     style={{
                       background: 'rgba(255,255,255,0.03)',
-                      padding: '1.6rem 2rem',
+                      padding: '1.2rem 1.5rem',
                       borderRadius: '20px',
                       borderColor: 'rgba(255,255,255,0.06)',
                     }}
@@ -274,14 +274,15 @@ function StickyCard({
               </div>
             ) : (
               <div
-                className="flex flex-col gap-5"
+                className="flex flex-col gap-3 md:gap-5"
                 style={{
-                  padding: '2rem 3rem 3rem',
-                  height: 'clamp(380px, 50vh, 580px)',
+                  padding: '1.5rem 1.5rem 2rem',
+                  height: 'auto',
+                  minHeight: 'clamp(300px, 50vh, 580px)',
                 }}
               >
                 {/* Full-width Main panel */}
-                <div className="flex-1 image-panel rounded-3xl h-full">
+                <div className="flex-1 image-panel rounded-3xl h-[250px] lg:h-full">
                   <ProjectPanel variant="main" index={index} imageUrl={venture.images.main} fit={venture.images.fit} />
                 </div>
                 {/* Full-width Description block */}
@@ -289,7 +290,7 @@ function StickyCard({
                   className="border flex-shrink-0 flex items-center w-full"
                   style={{
                     background: 'rgba(255,255,255,0.03)',
-                    padding: '1.6rem 2rem',
+                    padding: '1.2rem 1.5rem',
                     borderRadius: '20px',
                     borderColor: 'rgba(255,255,255,0.06)',
                   }}
@@ -331,7 +332,7 @@ export default function Ventures() {
           style={{
             y: titleY,
             opacity: titleOpacity,
-            fontSize: 'clamp(4.5rem, 13vw, 12rem)',
+            fontSize: 'clamp(3.5rem, 13vw, 12rem)',
             lineHeight: 0.86,
             letterSpacing: '-0.04em',
             fontWeight: 900,
